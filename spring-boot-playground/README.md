@@ -35,3 +35,24 @@ Otherwise we need to configure spring component scanning by using @SpringBootApp
 </dependency>
 
 TIP: To reload application you must rebuild application in IDE. For example in IntelliJ use option Build -> Build Project 
+
+# Spring actuators
+
+It gives an access to healtcheck, monitoring tools and metrics.
+To activate it you must add dependency to pom.xml.
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+Endpoints:
+	http://localhost:8081/actuator/health - healtcheck
+	http://localhost:8081/actuator/info - information about project
+		To customize info endpoint you need to add some informaitons to application.properties
+			info.app.name=Test app
+			info.app.description=My super cool app!!
+			info.app.version=1.0.0
+
+By default only /health and /info endpoint are exposed!
+
+Official documentation: https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html
