@@ -56,3 +56,12 @@ Endpoints:
 By default only /health and /info endpoint are exposed!
 
 Official documentation: https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html
+
+# Spring boot properties
+Spring boot properties are stored in application.properties
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html
+
+For example:
+- server.port - we can redefine default 8080 port
+- server.servlet.context-path - context path of application
