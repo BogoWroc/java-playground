@@ -65,3 +65,20 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-applicat
 For example:
 - server.port - we can redefine default 8080 port
 - server.servlet.context-path - context path of application
+
+# Data persist - CRUD 
+There are three options for building CRUD repositories in Spring
+- Hibernate API - we need to use session for managing entities
+- JPA - here we are using JPA entityManager
+- Spring Data JPA - here we must create an interface which will extends JpaRepository interface. By default Spring
+will provide basic CRUD operations and more.
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference
+
+
+# Data REST
+Spring provides Spring Data REST functionality. By adding only one dependency to pom file we get REST CRUD endpoints for free.
+https://docs.spring.io/spring-data/rest/docs/current/reference/html/#reference
+
+spring.data.rest.base-path=/magic-api - rest context
+@RepositoryRestResources(path="/members") - give us a possibility to rename default REST CRUD endpoint name.
+Annotation should be used at JpaRepository.   
