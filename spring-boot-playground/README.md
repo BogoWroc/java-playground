@@ -8,6 +8,26 @@
 # Spring modules
 www.spring.io
 
+# Inversion of Control (IoC)
+The approach of outsourcing the construction and management objects
+
+Spring is some kind of Object Factory with configuration.
+
+Spring container responsibility
+- Create ana manage objects (IoC)
+- Inject object's dependencies (Dependency Injection)
+
+Spring container configuration
+- XML - old style -> applicationContext.xml
+- Java Annotations - modern
+- Java Source Code - modern
+
+# Spring development process
+1. Configure Spring Beans
+2. Create a Spring Container -> ApplicationContext (ClassPatchXmlApplicationContext, AnnotationConfigApplicationContext, others)
+3. Retrieve Beans from Spring Contatier 
+
+
 # Bean scopes
 - singleton (default) - Spring container creates only one instance of the bean. It is cached in memory. 
 All requests for the bean will return SHARED reference to the SAME bean. TIP: Always create STATELESS bean!
