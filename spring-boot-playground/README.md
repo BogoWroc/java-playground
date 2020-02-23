@@ -27,6 +27,12 @@ Spring container configuration
 2. Create a Spring Container -> ApplicationContext (ClassPatchXmlApplicationContext, AnnotationConfigApplicationContext, others)
 3. Retrieve Beans from Spring Contatier 
 
+# Injection types
+
+There are few types injections in Spring
+- Constructor Injection
+- Setter Injection
+- Auto-wiring
 
 # Bean scopes
 - singleton (default) - Spring container creates only one instance of the bean. It is cached in memory. 
@@ -35,6 +41,14 @@ All requests for the bean will return SHARED reference to the SAME bean. TIP: Al
 - request - scoped to an HTTP web request. Only used for web apps
 - session - scoped to an HTTP web session. Only used for web apps
 - global-session - scoped to a global HTTP web session. Only used for web apps
+
+# Bean lifecycle
+
+Container started -> Bean Instantiated -> Dependencies Injected 
+-> Internal Spring Processing -> Your Custom Init Method (Bean is Ready for use)
+                              -> Container is Shutdown -> Your Custom Destroy Method -> STOP
+Bean lifecycle methods/hooks: init-method (@PostConstruct), destroy-method (@PreDestroy)
+For "prototype" scoped beans, Spring does not call the destroy method.  Gasp!  
 
 # Project initialization 
 
