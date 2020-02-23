@@ -1,3 +1,21 @@
+# Spring Framework
+- Core -> spring container - manage how beans are created. Factory for creating beans. Manage bean dependencies.
+- Infrastructure: aop - Aspect Oriented Programming: logging, security, transactions, etc
+- Data Access Layer - jdbc, orm, transactions, jms (for sending asynchronous messages to a Message Broker), oxm 
+- Web Layer - servlet, web socket, portlet ... Spring MVC
+- Test Layer - unit, integration, mock
+
+# Spring modules
+www.spring.io
+
+# Bean scopes
+- singleton (default) - Spring container creates only one instance of the bean. It is cached in memory. 
+All requests for the bean will return SHARED reference to the SAME bean. TIP: Always create STATELESS bean!
+- prototype - create a new bean instance for each container request
+- request - scoped to an HTTP web request. Only used for web apps
+- session - scoped to an HTTP web session. Only used for web apps
+- global-session - scoped to a global HTTP web session. Only used for web apps
+
 # Project initialization 
 
 https://start.spring.io/
