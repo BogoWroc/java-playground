@@ -25,14 +25,69 @@ Spring container configuration
 # Spring development process
 1. Configure Spring Beans
 2. Create a Spring Container -> ApplicationContext (ClassPatchXmlApplicationContext, AnnotationConfigApplicationContext, others)
-3. Retrieve Beans from Spring Contatier 
+3. Retrieve Beans from Spring Container
 
 # Injection types
+
+In Spring, constructor injection is preferred as it allows beans to be immutable and dependencies not null which
+will ensure that beans will always be completely initialized and fully functional.
 
 There are few types injections in Spring
 - Constructor Injection
 - Setter Injection
-- Auto-wiring
+- Field Injection
+
+The central annotation used to declare dependencies in Spring is the @Autowired annotation and can be used on fields,
+constructors, setters, and even methods.
+
+# Component Scanning
+When doing component scanning and finding classes with stereotype annotations,
+it creates the beans and just down-cases the first letter of the class names and sets them as the bean names.
+
+If you want to rename it, all you have to do is give the name to the @Component annotation (or any of the stereotype annotations) as argument.
+```
+@Component("simple")
+public class SimpleBeanImpl implements SimpleBean {...}
+
+import org.junit.jupiter.api.Test;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+class SimpleAppCfgTest {
+   @Test
+    void testBeanNames() {
+       ConfigurableApplicationContext ctx =
+            new AnnotationConfigApplicationContext(SimpleAppCfg.class);
+       SimpleBean simpleBean = ctx.getBean("simpleBeanImpl", SimpleBean.class);
+       assertNotNull(simpleBean);
+       assertTrue(simpleBean instanceof SimpleBeanImpl);
+    }
+}
+It is possible to have multiple names for a bean, but one of them will be the unique identifier and all the other names are just aliases.
+
+@Configuration
+public class AliasesCfg {
+    @Bean(name= {"beanOne", "beanTwo"})
+    SimpleBean simpleBean(){
+        return new SimpleBeanImpl();
+    }
+}
+```
+
+# Autowire
+ -  Spring will try to autowire by type, because rarely in an application more than one bean of a type is needed.
+    Spring inspects the type of dependency necessary and will inject the bean with that exact type.
+ -  By default, if Spring cannot decide which bean to autowire based on type
+    (because there are more beans of the same type in the application),
+    it first searches for any type of bean declared with a @Qualifier annotation on it.
+    If nothing is found, then it defaults to autowiring by name.
+    The name considered as the criterion for searching the proper dependency is the name of the field being autowired.
+ -  The @Value annotation is used when the value to inject is a scalar.13 Text values, numbers,
+    and booleans can be used as arguments for the constructor using the @Value attribute.
+ -  In setter injections
+    If a dependency is not mandatory you can always annotate the setter with @Autowired(required = false),
+    but in this case, you have to carefully design your code so that NullPointerExceptions will be avoided.
+
 
 # Bean scopes
 - singleton (default) - Spring container creates only one instance of the bean. It is cached in memory. 
@@ -40,7 +95,10 @@ All requests for the bean will return SHARED reference to the SAME bean. TIP: Al
 - prototype - create a new bean instance for each container request
 - request - scoped to an HTTP web request. Only used for web apps
 - session - scoped to an HTTP web session. Only used for web apps
-- global-session - scoped to a global HTTP web session. Only used for web apps
+- application, websocket  - scoped to a global HTTP web session. Only used for web apps
+
+The scope of a bean can be changed by using a special Spring annotation.
+This annotation is @Scope, and the default scope for a bean is singleton.
 
 # Bean lifecycle
 
