@@ -11,5 +11,7 @@ public class Main {
         System.out.println(helloWorldBean.sayHello("Bob"));
 
         applicationContext.close();
+
+
     }
 }

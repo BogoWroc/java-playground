@@ -18,9 +18,22 @@ Spring container responsibility
 - Inject object's dependencies (Dependency Injection)
 
 Spring container configuration
-- XML - old style -> applicationContext.xml
-- Java Annotations - modern
-- Java Source Code - modern
+- Full XML config - old style -> applicationContext.xml
+- XML Component Scan - Java Annotations - modern
+- Java Configuration Class- modern
+
+    ```
+    1.
+    @Configuration
+    @ComponentScan("x.y.z")
+    public class Configuration {
+    
+    }
+  
+    2. AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Configuration.class);
+    3. SomeBean someBean = ctx.getBean("someBean", SomeBean.class);
+    
+    ```
 
 # Spring development process
 1. Configure Spring Beans
