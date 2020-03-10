@@ -3,6 +3,7 @@ package org.example;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.msgpack.template.Templates;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,8 +21,8 @@ public class MessagePackExampleTest {
     @Test
     public void shouldConvertArrayOfBytesToObject() throws IOException {
         List<String> list = List.of("Some", "text");
-        Assertions.assertThat(messagePackExample.read(
-                messagePackExample.write(list)
+        Assertions.assertThat(messagePackExample.toListOf(
+                messagePackExample.write(list), Templates.TString
         ).equals(list));
     }
 }

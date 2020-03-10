@@ -1,6 +1,7 @@
 package org.example;
 
 import org.msgpack.MessagePack;
+import org.msgpack.template.Template;
 import org.msgpack.template.Templates;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class MessagePackExample {
         return mp.write(element);
     }
 
-    public List<String> read(byte[] raw) throws IOException {
-        return mp.read(raw, Templates.tList(Templates.TString));
+    public List<String> toListOf(byte[] raw, Template<String> template) throws IOException {
+        return mp.read(raw, Templates.tList(template));
     }
 }
